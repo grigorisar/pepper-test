@@ -9,6 +9,11 @@ describe('game test', () => {
 
 	it('returns false when an invalid word is entered (greg tests)', () => {
 		const game = new Game();
+		expect(game.enter('zorro'.split(''))).toBe(true);
+	});
+
+	it('greg tests 2', () => {
+		const game = new Game();
 		expect(game.enter('zorro'.split(''))).toBe(false);
 	});
 });

@@ -7,7 +7,7 @@ describe('game test', () => {
 		expect(game.enter('zorro'.split(''))).toBe(true);
 	});
 
-	it('returns false when an invalid word is entered', () => {
+	it('returns false when an invalid word is entered (greg)', () => {
 		const game = new Game();
 		expect(game.enter('zorro'.split(''))).toBe(false);
 	});

@@ -8,25 +8,28 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+strategy:
+  matrix:
+    node-version: ['18.x', '22.9']
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Install Vitest
-      run: npm install vitest
+      - name: Install Vitest
+        run: npm install vitest
 
-    - name: Run tests with Vitest
-      run: npx vitest run
+      - name: Run tests with Vitest
+        run: npx vitest run
 
-    - name: Annotate PR
-      if: failure()
-      run: echo "##[error] Tests failed" >> $GITHUB_ENV
+      - name: Annotate PR
+        if: failure()
+        run: echo "##[error] Tests failed" >> $GITHUB_ENV

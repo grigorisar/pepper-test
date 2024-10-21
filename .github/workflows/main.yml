@@ -8,9 +8,10 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-strategy:
-  matrix:
-    node-version: ['18.x', '22.9']
+
+    strategy:
+      matrix:
+        node-version: ['18.x', '22.9']
 
     steps:
       - name: Checkout code
@@ -30,6 +31,6 @@ strategy:
       - name: Run tests with Vitest
         run: npx vitest run
 
-      - name: Annotate PR
-        if: failure()
-        run: echo "##[error] Tests failed" >> $GITHUB_ENV
+      # - name: Annotate PR
+      #   if: failure()
+      #   run: echo "##[error] Tests failed" >> $GITHUB_ENV

@@ -1,25 +1,32 @@
-name: Run Unit Tests
+name: Run tests on push
 
 on:
   push:
-    branches:
-      - "**"
+    branches-ignore:
+      - main
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: npm install
 
-      - name: Run unit tests
-        run: npx vitest
+    - name: Install Vitest
+      run: npm install vitest
+
+    - name: Run tests with Vitest
+      run: npx vitest run
+
+    - name: Annotate PR
+      if: failure()
+      run: echo "##[error] Tests failed" >> $GITHUB_ENV

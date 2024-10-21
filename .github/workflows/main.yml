@@ -2,8 +2,10 @@ name: Run tests on push
 
 on:
   pull_request:
-    branches-ignore:
-      - main
+    # branches-ignore:
+    #   - main
+    branches:
+      - '**'
 
 jobs:
   test:

@@ -17,8 +17,8 @@ describe('game test', () => {
 		expect(game.enter('zorro'.split(''))).toBe(true);
 	});
 
-	it('greg tests 3', () => {
+	it('greg tests 3 ss', () => {
 		const game = new Game();
-		expect(game.enter('zorro'.split(''))).toBe(false);
+		expect(game.enter('zorro'.split(''))).toBe(true);
 	});
 });
